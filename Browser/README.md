@@ -9,7 +9,7 @@ _How Browsers Work: Behind the scenes of modern web browsers_
 
 ### Browser의 주요 구성 요소
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cdab612f-8e61-4df1-ab7b-a7068fc14606/Untitled.png)
+![image](https://user-images.githubusercontent.com/22098393/153185787-385ac369-701d-4515-8262-23f5f65f87c9.png)
 
 _Chrome은 다른 Browser과 달리 각 Tab마다 별도의 렌더링 엔진 인스턴스를 유지함_
 
@@ -28,7 +28,7 @@ _각 탭이 독립된 프로세스로 처리됨_
 - HTML parser와 CSS parser에 의해 parsing되어 DOM · CSSOM 트리 생성
 - DOM + CSSOM ⇒ Render Tree ( Render Tree를 기반으로 웹 페이지를 표시 )
 
-![Rendering Engine 동작 과정](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8c3866fc-2c03-4e60-9717-f85d2b117414/Untitled.png)
+![image](https://user-images.githubusercontent.com/22098393/153185861-4623a032-897f-4356-a10f-8e8a29a3b344.png)
 
 Rendering Engine 동작 과정
 
@@ -46,11 +46,11 @@ Render Tree는 색상 또는 면적과 같은 시각적 속성이 있는 사각�
 - 렌더 트리 배치 `**좌표값**`: 구축된 렌더 트리를 바탕으로 각 요소를 화면 특정 위치에 배치
 - 렌더 트리 그리기 ( 화면 표시 )
 
-![웹킷 동작 과정](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/56c8e295-8749-494f-894b-d3985b0354ef/Untitled.png)
+![image](https://user-images.githubusercontent.com/22098393/153185884-bef80f57-3033-4cf6-8849-6ba45d7e8de7.png)
 
 웹킷 동작 과정
 
-![모질라의 게코 렌더링 엔진 동작 과정](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4b9d1dd8-aad7-4755-a717-3bf3bc420055/Untitled.png)
+![image](https://user-images.githubusercontent.com/22098393/153185893-ac3622ec-de23-497b-b1bb-2c34ab7ca9a8.png)
 
 모질라의 게코 렌더링 엔진 동작 과정
 
@@ -79,7 +79,7 @@ _간단한 개념정리_
 
 >
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/91d0c394-0c5d-4aef-b166-901cde70656a/Untitled.png)
+![image](https://user-images.githubusercontent.com/22098393/153185925-8e50b461-998b-4bca-ad6c-e144704471e3.png)
 
 - 파서는 어휘 분석기로부터 새 토큰을 받아 구문 분석을 수행
   - 규칙에 적합하면 토큰에 해당하는 노드를 파싱 트리에 추가 후 과정 반복
@@ -95,11 +95,11 @@ _간단한 개념정리_
 
 > 컴파일러는 파싱 트리를 생성하고 이를 기계 코드 문서로 변환함
 
----
+
 
 # 그렇다면 Browser는?
 
-## HTML Parser
+### HTML Parser
 
 > HTML Parser는 HTML Markup을 Parsing Tree로 변환
 
@@ -114,7 +114,7 @@ HTML이 더 유연 - HTML은 암묵적으로 태그에 대한 생략이 가능�
 
 이 때문에 공식적인 문법으로 작성하기 어렵게 만들며 HTML은 파싱하기 어렵고 전통적인 구문 분석이 불가능 하기 때문에 문맥 자유 문법에 포함되지 않음
 
-## DTD _Document Type Definition_
+### DTD _Document Type Definition_
 
 > SGML 계열 언어의 정의를 이용한 HTML 정의를 위한 공식적인 형식
 > 허용되는 모든 요소 및 그들의 속성 그리고 중첩 구조에 대한 정의를 포함
@@ -142,7 +142,7 @@ DOM은 마크업과 1:1 관계를 맺는다.
 </html>
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/99e9f169-af34-4f4e-ac78-37a58801908e/Untitled.png)
+![image](https://user-images.githubusercontent.com/22098393/153185975-aee88ea0-c4f1-4fcb-8629-b3a9abbc8929.png)
 
 ## ❓그래서 HTML Parsing은 어떻게 동작하는가
 
@@ -155,7 +155,7 @@ _앞서 설명한바와 같이 아래와 같은 이유로 HTML은 일반적인 �
 **브라우저는 이를 해결하기 위해 HTML 파싱을 위한 별도의 파서를 생성함**
 [_https://html.spec.whatwg.org/multipage/parsing.html_](https://html.spec.whatwg.org/multipage/parsing.html)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/95a9b73d-d865-4b70-8d59-2a40a11cd10c/Untitled.png)
+![image](https://user-images.githubusercontent.com/22098393/153186007-fa06c709-c4f1-420e-a540-9b3f16cdafa9.png)
 
 파싱 알고리즘: `토큰화` 알고리즘+ `트리 구축` 알고리즘
 
@@ -168,11 +168,11 @@ _앞서 설명한바와 같이 아래와 같은 이유로 HTML은 일반적인 �
 <!--입력예제-->
 ```
 
-![입력 예제의 토큰화 ( 토큰화 알고리즘 )](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cf985fe5-55e1-4472-91e4-5bc376bf169d/Untitled.png)
+![image](https://user-images.githubusercontent.com/22098393/153186024-953f9480-1d62-48a6-bed7-b312287284f6.png)
 
 입력 예제의 토큰화 ( 토큰화 알고리즘 )
 
-![입력 예제의 트리 구축 ( 트리 구축 알고리즘 )](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/44a4f84d-237a-44ec-8693-35d4be2a5580/Untitled.png)
+![image](https://user-images.githubusercontent.com/22098393/153186050-9ab4f0dc-81bb-4f36-b04f-d9adb556195c.png)
 
 입력 예제의 트리 구축 ( 트리 구축 알고리즘 )
 
@@ -264,3 +264,7 @@ if (!m_currentFormElement) {
   m_currentFormElement = new HTMLFormElement(formTag, m_document);
 }
 ```
+
+---
+
+출처: https://d2.naver.com/helloworld/59361
