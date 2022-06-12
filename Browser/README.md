@@ -15,13 +15,14 @@ _Chrome은 다른 Browser과 달리 각 Tab마다 별도의 렌더링 엔진 인
 
 _각 탭이 독립된 프로세스로 처리됨_
 
-```html
-### 렌더링 엔진 ### 게코 *Gecko* : Internet explorer, Firefox 웹킷 *Webkit* : Chrome, Safari
-```
-
 ## Rendering Engine
 
 > request에 대응하는 response 내용을 브라우저 화면에 표시
+```html
+렌더링 엔진 종류 
+Gecko : Internet explorer, Firefox 
+Webkit : Chrome, Safari
+```
 
 - HTML XML 문서와 이미지를 표시할 수 있음
 - Plugin이나 확장 기능을 이용하여 PDF 등의 다른 유형도 표시 가능
@@ -30,54 +31,51 @@ _각 탭이 독립된 프로세스로 처리됨_
 
 ![image](https://user-images.githubusercontent.com/22098393/153185861-4623a032-897f-4356-a10f-8e8a29a3b344.png)
 
-Rendering Engine 동작 과정
+동작 과정
 
 > 렌더링 엔진은 통신으로부터 요청한 문서의 내용을 얻는 것으로 시작
+> 
 > 문서의 내용은 보통 8KB 단위로 전송
 
-DOM 트리를 바탕으로 Render 트리를 구축할 때, 이미 완성된 DOM 트리부터 Render 트리 구축을 수행
-`**병렬실행**`
+DOM 트리를 바탕으로 Render 트리를 구축할 때, 이미 완성된 DOM 트리부터 Render 트리 구축을 `병렬실행`
 
->
-
-Render Tree는 색상 또는 면적과 같은 시각적 속성이 있는 사각형을 포함하며,
-정해진 순서대로 화면에 표시
-
-- 렌더 트리 배치 `**좌표값**`: 구축된 렌더 트리를 바탕으로 각 요소를 화면 특정 위치에 배치
+- Render Tree는 색상 또는 면적과 같은 시각적 속성이 있는 사각형을 포함하며, <br/>정해진 순서대로 화면에 표시
+- 렌더 트리 배치 `좌표값`: 구축된 렌더 트리를 바탕으로 각 요소를 화면 특정 위치에 배치
 - 렌더 트리 그리기 ( 화면 표시 )
 
 ![image](https://user-images.githubusercontent.com/22098393/153185884-bef80f57-3033-4cf6-8849-6ba45d7e8de7.png)
 
-웹킷 동작 과정
+*webkit 동작 과정*
 
 ![image](https://user-images.githubusercontent.com/22098393/153185893-ac3622ec-de23-497b-b1bb-2c34ab7ca9a8.png)
 
-모질라의 게코 렌더링 엔진 동작 과정
+*gecko 동작 과정*
 
-# 파싱과 DOM 트리 구축
+---
+## 파싱과 DOM 트리 구축
 
 _간단한 개념정리_
 
----
+### 파싱
 
-## 파싱
-
-> `**파싱**` 브라우저가 코드를 이해하고 사용할 수 있는 구조로 변환하는 것을 의미
+> _`파싱`_ 브라우저가 코드를 이해하고 사용할 수 있는 구조로 변환하는 것을 의미
+> 
 > 파싱 결과는 문서 구조를 나타내는 노드 트리 (= 파싱 트리 _Parsing tree_ = 문법 트리 _Syntax tree_ )
 
 ### 문법
 
 > 파싱 Parsing을 하기 위해서는 대상 문서가 언어 또는 형식, 구문 규칙에 따라야 하는데,
-> 이것을 `**문맥 자유 문법**` 이라고 함
+> 
+> 이것을 _`문맥 자유 문법`_ 이라고 함
 
 ### 어휘 분석 vs 구문 분석
 
-> 어휘 분석: 자료를 \**토큰*으로 분해하는 과정 ( 공백과 줄 바꿈 등의 의미 없는 문자 제거 )
+> 어휘 분석: 자료를 *토큰*으로 분해하는 과정 ( 공백과 줄 바꿈 등의 의미 없는 문자 제거 )
+> 
 > 구문 분석: 언어의 구문 규칙을 적용하는 과정 ( 파싱 트리 생성 )
 
-\*토큰: 유효하게 구성된 단위의 집합체 ( 용어집 = 단어 )
+토큰: 유효하게 구성된 단위의 집합체 ( 용어집 = 단어 )
 
->
 
 ![image](https://user-images.githubusercontent.com/22098393/153185925-8e50b461-998b-4bca-ad6c-e144704471e3.png)
 
@@ -99,37 +97,41 @@ _간단한 개념정리_
 
 # 그렇다면 Browser는?
 
-### HTML Parser
+---
+## HTML Parsing
 
 > HTML Parser는 HTML Markup을 Parsing Tree로 변환
 
 ### 💡HTML Parsing은 `문맥 자유 문법`이 아니다.
 
 > 전통적인 Parser는 HTML에 적용할 수 없다. HTML은 파서가 요구하는 문맥 자유 문법에 의해 쉽게 정의되지 않음
+> 
 > 파싱은 CSS와 Javascript를 파싱하는 데 사용됨
 
 ### ❓XML 그리고 XHTML도 파서가 존재하는데, HTML 이 없는 이유는?
 
 HTML이 더 유연 - HTML은 암묵적으로 태그에 대한 생략이 가능하기 때문에 유연한 문법을 제공한다.
 
-이 때문에 공식적인 문법으로 작성하기 어렵게 만들며 HTML은 파싱하기 어렵고 전통적인 구문 분석이 불가능 하기 때문에 문맥 자유 문법에 포함되지 않음
+이 때문에 공식적인 문법으로 작성하기 어렵게 만들며 HTML은 파싱하기 어렵고 전통적인 구문 분석이 불가능 하기 때문에 
+
+문맥 자유 문법에 포함되지 않음
 
 ### DTD _Document Type Definition_
 
 > SGML 계열 언어의 정의를 이용한 HTML 정의를 위한 공식적인 형식
+> 
 > 허용되는 모든 요소 및 그들의 속성 그리고 중첩 구조에 대한 정의를 포함
 
-- 여러 버전의 DTD가 존재하며, 엄격한 혁식은 명세를 따르지만,
+- 여러 버전의 DTD가 존재하며, 엄격한 혁식은 명세를 따르지만,<br/>
   다른 형식은 낡은 브라우저에서 사용된 마크업을 지원
 
 ### DOM _Document Object Model_
 
 > 문서 객체 모델의 준말으로, HTML 문서의 객체 표현 (외부 - Javascript에서 사용)
+> 
 > 브라우저 환경에서 트리의 최상위 객체는 document
 
 [https://www.w3.org/DOM/DOMTR](https://www.w3.org/DOM/DOMTR) 에 명세되어있음
-
->
 
 DOM은 마크업과 1:1 관계를 맺는다.
 
@@ -144,20 +146,19 @@ DOM은 마크업과 1:1 관계를 맺는다.
 
 ![image](https://user-images.githubusercontent.com/22098393/153185975-aee88ea0-c4f1-4fcb-8629-b3a9abbc8929.png)
 
-## ❓그래서 HTML Parsing은 어떻게 동작하는가
+### ❓그래서 HTML Parsing은 어떻게 동작하는가
 
-_앞서 설명한바와 같이 아래와 같은 이유로 HTML은 일반적인 하향식 또는 상향식 파서로 파싱이 되지 않음_
+> 앞서 설명한바와 같이 아래와 같은 이유로 HTML은 일반적인 하향식 또는 상향식 파서로 파싱이 되지 않음
 
 1. 언어의 유연한 문법
 2. 잘 알려져 있는 HTML 오류에 대한 브라우저의 관용
-3. 변경에 의한 재파싱 - 일반적으로 소스는 파싱하는 동안 변하지 않지만, HTML에서 document.write을 포함하는 스크립트 태그는 토큰을 추가할 수 있기 때문에 실제로는 입력 과정에서 파싱이 수정됨
+3. 변경에 의한 재파싱 - 일반적으로 소스는 파싱하는 동안 변하지 않지만, <br/>HTML에서 document.write을 포함하는 스크립트 태그는 토큰을 추가할 수 있기 때문에 <br/>실제로는 입력 과정에서 파싱이 수정됨
+4. **파싱은 `토큰화` 알고리즘+ `트리 구축` 알고리즘으로 구성됨**
 
 **브라우저는 이를 해결하기 위해 HTML 파싱을 위한 별도의 파서를 생성함**
-[_https://html.spec.whatwg.org/multipage/parsing.html_](https://html.spec.whatwg.org/multipage/parsing.html)
+[참고](https://html.spec.whatwg.org/multipage/parsing.html)
 
 ![image](https://user-images.githubusercontent.com/22098393/153186007-fa06c709-c4f1-420e-a540-9b3f16cdafa9.png)
-
-파싱 알고리즘: `토큰화` 알고리즘+ `트리 구축` 알고리즘
 
 ```html
 <html>
@@ -182,7 +183,7 @@ _문서파싱 이후 실행되어야 하는 `**“지연” 모드 스크립트*
 
 문서 상태는 `완료` 로 전환 `로드` 이벤트 발생 ( 자세한 내용: [HTML5의 토큰화 알고리즘과 트리 구축](https://html.spec.whatwg.org/multipage/syntax.html) )
 
-## 💡유효하지 않은 문법 처리
+### 💡유효하지 않은 문법 처리
 
 > HTML에서 유효하지 않은 태그를 삽입하거나, 문법적 오류가 존재하는 문서를 만들 시,
 > 에러가 발생하지 않은 이유
@@ -204,9 +205,9 @@ _HTML5 명세는 이러한 요구사항 일부를 명세 & 웹킷은 HTML 파서
 
 **BR태그 오류**
 
-> \<br> 태그와 \</br> 태그가 혼용되어 사용되었을 때 오류 처리
+> br 태그와 /br 태그가 혼용되어 사용되었을 때 오류 처리
 
-_internet explorer, firefox와 호환성을 가지기 위해 웹킷은 </br>을 <br>으로 간주한다._
+_internet explorer, firefox와 호환성을 가지기 위해 웹킷은 \</br>을 \<br>으로 간주한다._
 
 ```jsx
 if(t->isCloseTag(brTag) && m_document->inCompatMode()) {
@@ -265,6 +266,15 @@ if (!m_currentFormElement) {
 }
 ```
 
+**이 외에도 태그 중첩이 너무 깊을 때, 잘못 닫힌 태그 처리 등이 있다.**
+
+
 ---
+## HTML Parsing
+
+> HTML Parser는 HTML Markup을 Parsing Tree로 변환
+
+### 💡HTML Parsing은 `문맥 자유 문법`이 아니다.
+
 
 출처: https://d2.naver.com/helloworld/59361
